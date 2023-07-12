@@ -1,0 +1,44 @@
+version: '3'
+services:
+  database:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: project_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      TZ: Asia/Tokyo
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    healthcheck:
+        test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
+  app:
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      database:
+        condition: service_healthy
+
+#   nginx:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile_nginx
+#     ports:
+#       - 80:80
+#       - 443:443
+#     volumes:
+#       - ./certs:/etc/letsencrypt
+#     depends_on:
+#       - app
+
+#   certbot:
+#       image: certbot/certbot:latest
+#       volumes:
+#         - /etc/letsencrypt:/etc/letsencrypt
+#         - /var/www/html:/var/www/html
+#       command: ["--version"]
+
+# volumes:
+#   mysql-data:
+#   certs:
