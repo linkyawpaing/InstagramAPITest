@@ -1,3 +1,3 @@
-# FlaskSample2023
+# InstaSample2023
 
-プロジェクト管理ツール
+インスタのAPIを使うためのサンプルコード
