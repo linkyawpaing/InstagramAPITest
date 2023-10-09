@@ -7,7 +7,7 @@ function fetchInstagramPhotos() {
         return;
     }
 
-    const endpoint = `https://graph.instagram.com/${USER_ID}/media?fields=id,caption,media_type,media_url&access_token=${ACCESS_TOKEN}`;
+    const endpoint = `https://graph.facebook.com/v18.0/${USER_ID}/media?fields=id,caption,media_type,media_url&access_token=${ACCESS_TOKEN}`;
 
     fetch(endpoint)
         .then(response => response.json())
