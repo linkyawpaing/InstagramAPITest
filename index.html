@@ -4,12 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instagram Photo Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        div {
+            text-align: center;
+        }
+        #photos img {
+            margin: 10px;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
 
 <div>
+    <label for="userId">Enter your User ID:</label>
+    <input type="text" id="userId" placeholder="Your Instagram User ID here">
+    <br><br> <!-- 改行を追加 -->
     <label for="token">Enter your ACCESS_TOKEN:</label>
-    <input type="text" id="token" placeholder="Your Instagram ACCESS_TOKEN here">
+    <input type="password" id="token" placeholder="Your Instagram ACCESS_TOKEN here">
     <button onclick="fetchInstagramPhotos()">Show My Photos</button>
 </div>
 
