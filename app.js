@@ -1,16 +1,20 @@
 function fetchInstagramPhotos() {
     const ACCESS_TOKEN = document.getElementById("token").value;
+    const USER_ID = document.getElementById("userId").value; // ユーザーIDを取得
 
-    if (!ACCESS_TOKEN) {
-        alert("Please enter your ACCESS_TOKEN.");
+    if (!ACCESS_TOKEN || !USER_ID) {
+        alert("Please enter your User ID and ACCESS_TOKEN.");
         return;
     }
 
-    const endpoint = `https://graph.instagram.com/1349872215956516/media?fields=id,caption&access_token=${ACCESS_TOKEN}`;
+    const endpoint = `https://graph.instagram.com/${USER_ID}/media?fields=id,caption,media_type,media_url&access_token=${ACCESS_TOKEN}`;
 
     fetch(endpoint)
         .then(response => response.json())
         .then(data => {
+            if (data.error) {
+                throw new Error(data.error.message);
+            }
             displayPhotos(data.data);
         })
         .catch(error => {
