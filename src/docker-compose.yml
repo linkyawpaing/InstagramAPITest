@@ -1,17 +1,24 @@
 version: '3'
 services:
   database:
-    image: mysql:latest
+    image: mariadb:10.4.31
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: project_db
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: photobook
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admin
+      MARIADB_CHARACTER_SET_SERVER: utf8mb4
+      MARIADB_COLLATION_SERVER: utf8mb4_unicode_ci
       TZ: Asia/Tokyo
-    volumes:
-      - ./mysql-data:/var/lib/mysql
+    # volumes:
+    #   - ./mysql-data:/var/lib/mysql
+    tty: true
     healthcheck:
-        test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD
+      test: ["CMD", "mysql", "-uadmin", "-padmin", "-e", "use photobook"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s # sleep の分だけ遅延させる
   app:
     build: .
     ports:
@@ -20,17 +27,16 @@ services:
       database:
         condition: service_healthy
 
-#   nginx:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile_nginx
-#     ports:
-#       - 80:80
-#       - 443:443
-#     volumes:
-#       - ./certs:/etc/letsencrypt
-#     depends_on:
-#       - app
+  # nginx:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile_nginx
+  #   ports:
+  #     - 10080:80
+  #   volumes:
+  #     - ./certs:/etc/letsencrypt
+  #   depends_on:
+  #     - app
 
 #   certbot:
 #       image: certbot/certbot:latest

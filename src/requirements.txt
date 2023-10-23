@@ -1,5 +1,12 @@
-Flask==2.1.3
-SQLAlchemy==1.4
-Flask-SQLAlchemy
-mysqlclient
+Flask==2.2.5
+Flask-SQLAlchemy==3.0.5
+SQLAlchemy==2.0.22
+requests==2.31.0
 uwsgi
+mysqlclient
+#Flask==3.0.0
+#Flask-SQLAlchemy==3.1.1
+#SQLAlchemy==2.0.22
+#requests==2.31.0
+#uwsgi==2.0.19.1
+#mysqlclient==2.2.0

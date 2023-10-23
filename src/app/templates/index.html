@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>プロジェクト一覧</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Photo Viewer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>プロジェクト一覧</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>プロジェクト名</th>
-                <th>説明</th>
-                <th>開始日</th>
-                <th>締め切り</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for project in projects %}
-                <tr>
-                    <td><a href="{{ url_for('project_detail', project_id=project.id) }}">{{ project.title }}</a></td>
-                    <td>{{ project.description }}</td>
-                    <td>{{ project.start_date }}</td>
-                    <td>{{ project.deadline }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{ url_for('create_project') }}">新しいプロジェクトを作成</a>
+
+<section>
+    <label for="userId">Enter your User ID:</label>
+    <input type="text" id="userId" placeholder="Your Instagram User ID here">
+    <br><br>
+    <label for="token">Enter your ACCESS_TOKEN:</label>
+    <input type="password" id="token" placeholder="Your Instagram ACCESS_TOKEN here">
+    <br><br>
+    <label for="hashtag">Enter a hashtag to search:</label>
+    <input type="text" id="hashtag" placeholder="#yourHashtag">
+    <br><br>
+    <button onclick="fetchInstagramPhotos()">Show My Photos</button>
+    <button onclick="fetchHashtags()">Show My Hashtags</button>
+    <button onclick="searchByHashtag()">Search by Hashtag</button>
+</section>
+
+<div id="photos"></div>
+<div id="hashtags"></div>
+
+<section>
+    <label for="photobookName">Enter Photobook Name:</label>
+    <input type="text" id="photobookName" placeholder="Your Photobook Name">
+    <button onclick="createPhotobook()">Create Photobook</button>
+</section>
+
+<section id="existingPhotobooks">
+    <label for="photobookList">Select Photobook:</label>
+    <select id="photobookList"></select>
+    <button onclick="loadPhotobooks()">Load Photobooks</button>
+    <button onclick="displaySelectedPhotobook()">Display Photobook</button>
+</section>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
-
