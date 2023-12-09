@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Photo Viewer</title>
+    <style>
+        /* ページ全体のスタイリング */
+        body {
+            font-family: Arial, sans-serif; /* フォントスタイル */
+            background-color: #f0f2f5; /* 背景色 */
+            margin: 0;
+            padding: 20px;
+            text-align: center; /* テキストを中央揃えにする */
+        }
+        /* 入力フィールドとボタンのスタイリング */
+        input, button {
+            margin: 10px 0; /* 上下のマージン */
+            padding: 8px; /* パディング */
+            border: 1px solid #ddd; /* 境界線のスタイル */
+            border-radius: 4px; /* 境界線の角を丸くする */
+        }
+        /* ボタンのスタイリング */
+        button {
+            cursor: pointer; /* カーソルをポインターにする */
+            background-color: #4CAF50; /* 背景色 */
+            color: white; /* テキスト色 */
+            border: none; /* 境界線をなくす */
+        }
+        /* 写真のスタイリング */
+        #photos img {
+            margin: 10px; /* マージン */
+            max-width: 100%; /* 最大幅 */
+            height: auto; /* 高さを自動調整 */
+        }
+    </style>
+</head>
+<body>
+
+<h2>Instagram Photo Viewer</h2>
+
+<!-- ユーザーIDの入力フィールド -->
+<label for="userId">User ID:</label>
+<input type="text" id="userId" placeholder="Enter User ID">
+<br>
+<!-- アクセストークンの入力フィールド -->
+<label for="token">ACCESS_TOKEN:</label>
+<input type="password" id="token" placeholder="Enter Access Token">
+<br>
+<!-- 写真を表示するボタン -->
+<button onclick="fetchInstagramPhotos()">Show Photos</button>
+
+<!-- 写真を表示するための領域 -->
+<div id="photos"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

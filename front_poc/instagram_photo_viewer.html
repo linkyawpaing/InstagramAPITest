@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Photo Viewer</title>
+    <style>
+        /* ページ全体のスタイル設定 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* フォントスタイルの設定 */
+            background-color: #f0f2f5; /* 背景色 */
+            margin: 0;
+            padding: 20px;
+            display: flex; /* フレックスボックスを使用 */
+            flex-direction: column; /* 縦方向のレイアウト */
+            align-items: center; /* 中央揃え */
+            justify-content: center; /* 中央揃え */
+            min-height: 100vh; /* 最小高さをビューポートの高さに設定 */
+        }
+        /* コンテナのスタイル設定 */
+        .container {
+            max-width: 600px; /* 最大幅 */
+            background-color: white; /* 背景色 */
+            padding: 20px; /* パディング */
+            border-radius: 10px; /* 角の丸み */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影の設定 */
+            text-align: center; /* テキストを中央揃え */
+        }
+        /* 入力フィールドとボタンのスタイル設定 */
+        input, button {
+            padding: 10px; /* パディング */
+            margin: 10px 0; /* 上下のマージン */
+            border-radius: 5px; /* 角の丸み */
+            border: 1px solid #ddd; /* 境界線のスタイル */
+            width: calc(100% - 22px); /* 幅の設定 */
+        }
+        /* ボタンのスタイル設定 */
+        button {
+            background-color: #4CAF50; /* 背景色 */
+            color: white; /* 文字色 */
+            border: none; /* 境界線なし */
+            cursor: pointer; /* カーソルをポインターに設定 */
+        }
+        /* ボタンにマウスオーバーしたときのスタイル */
+        button:hover {
+            background-color: #45a049; /* 背景色を変更 */
+        }
+        /* 写真のスタイル設定 */
+        #photos img {
+            margin: 10px; /* マージン */
+            border-radius: 8px; /* 角の丸み */
+            max-width: 100%; /* 最大幅 */
+            height: auto; /* 高さを自動調整 */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Instagram Photo Viewer</h2>
+    <!-- ユーザーID入力フィールド -->
+    <label for="userId">Enter your User ID:</label>
+    <input type="text" id="userId" placeholder="Your Instagram User ID here">
+    <br>
+    <!-- アクセストークン入力フィールド -->
+    <label for="token">Enter your ACCESS_TOKEN:</label>
+    <input type="password" id="token" placeholder="Your Instagram ACCESS_TOKEN here">
+    <!-- 写真表示ボタン -->
+    <button onclick="fetchInstagramPhotos()">Show My Photos</button>
+</div>
+
+<!-- 写真を表示するための領域 -->
+<div id="photos"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
