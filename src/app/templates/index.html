@@ -8,35 +8,46 @@
 </head>
 <body>
 
-<section>
-    <label for="userId">Enter your User ID:</label>
-    <input type="text" id="userId" placeholder="Your Instagram User ID here">
-    <br><br>
-    <label for="token">Enter your ACCESS_TOKEN:</label>
-    <input type="password" id="token" placeholder="Your Instagram ACCESS_TOKEN here">
-    <br><br>
-    <label for="hashtag">Enter a hashtag to search:</label>
-    <input type="text" id="hashtag" placeholder="#yourHashtag">
-    <br><br>
-    <button onclick="fetchInstagramPhotos()">Show My Photos</button>
-    <button onclick="fetchHashtags()">Show My Hashtags</button>
-    <button onclick="searchByHashtag()">Search by Hashtag</button>
+<section class="input-section">
+    <div class="input-group">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" placeholder="Your Instagram User ID">
+    </div>
+    <div class="input-group">
+        <label for="token">ACCESS_TOKEN:</label>
+        <input type="password" id="token" placeholder="Your Instagram Access Token">
+    </div>
+    <div class="input-group">
+        <label for="hashtag">Hashtag:</label>
+        <input type="text" id="hashtag" placeholder="#yourHashtag">
+    </div>
+    <div class="button-group">
+        <button onclick="fetchInstagramPhotos()">Show My Photos</button>
+        <button onclick="fetchHashtags()">Show My Hashtags</button>
+        <button onclick="searchByHashtag()">Search by Hashtag</button>
+    </div>
 </section>
 
-<div id="photos"></div>
-<div id="hashtags"></div>
+<div id="photos" class="photo-gallery"></div>
+<div id="hashtags" class="hashtag-list"></div>
 
-<section>
-    <label for="photobookName">Enter Photobook Name:</label>
-    <input type="text" id="photobookName" placeholder="Your Photobook Name">
+<section class="photobook-section">
+    <div class="input-group">
+        <label for="photobookName">Photobook Name:</label>
+        <input type="text" id="photobookName" placeholder="Your Photobook Name">
+    </div>
     <button onclick="createPhotobook()">Create Photobook</button>
 </section>
 
-<section id="existingPhotobooks">
-    <label for="photobookList">Select Photobook:</label>
-    <select id="photobookList"></select>
-    <button onclick="loadPhotobooks()">Load Photobooks</button>
-    <button onclick="displaySelectedPhotobook()">Display Photobook</button>
+<section class="photobook-loader">
+    <div class="input-group">
+        <label for="photobookList">Select Photobook:</label>
+        <select id="photobookList"></select>
+    </div>
+    <div class="button-group">
+        <button onclick="loadPhotobooks()">Load Photobooks</button>
+        <button onclick="displaySelectedPhotobook()">Display Photobook</button>
+    </div>
 </section>
 
 <script src="{{ url_for('static', filename='app.js') }}"></script>
