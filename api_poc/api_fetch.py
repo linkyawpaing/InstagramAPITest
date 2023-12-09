@@ -9,25 +9,26 @@ INSTAGRAM_ACCESS_TOKEN = os.getenv('INSTAGRAM_ACCESS_TOKEN')
 # ユーザープロフィールを取得する関数
 def get_user_profile():
     url = f"https://graph.facebook.com/v18.0/me?fields=id%2Cname&access_token={INSTAGRAM_ACCESS_TOKEN}"
-    # ここを実装する
-    pass
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception("API request failed with status code " + str(response.status_code))
 
 # データを処理して表示する関数
 def process_data(data):
-    # ここを実装する
-    pass
+    print(data)
+    print("User ID:", data['id'])
+    print("Username:", data['name'])
 
 # エラーハンドリングを行う関数
-def handle_errors(response):
-    # ここを実装する
-    pass
+def handle_errors(e):
+    print("An error occurred:", e)
 
 # メイン関数
 def main():
     try:
-        # ユーザプロファイル取得
         profile = get_user_profile()
-        # プロファイルを表示
         process_data(profile)
     except Exception as e:
         handle_errors(e)
