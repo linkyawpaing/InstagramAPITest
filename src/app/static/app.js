@@ -65,18 +65,20 @@ function displayHashtags(hashtags) {
 }
 
 function fetchInstagramPhotos() {
-    const { ACCESS_TOKEN, USER_ID } = getInputs();
+    // const { ACCESS_TOKEN, USER_ID } = getInputs();
 
-    if (!ACCESS_TOKEN || !USER_ID) {
-        alert("Please enter your User ID and ACCESS_TOKEN.");
-        return;
-    }
+    // if (!ACCESS_TOKEN || !USER_ID) {
+    //     alert("Please enter your User ID and ACCESS_TOKEN.");
+    //     return;
+    // }
 
-    const endpoint = `https://graph.facebook.com/v18.0/${USER_ID}/media?fields=id,caption,media_type,media_url&access_token=${ACCESS_TOKEN}`;
+    // const endpoint = `https://graph.facebook.com/v18.0/${USER_ID}/media?fields=id,caption,media_type,media_url&access_token=${ACCESS_TOKEN}`;
 
-    fetchFromEndpoint(endpoint)
-        .then(data => displayPhotos(data.data))
-        .catch(error => handleError(error, 'Error fetching Instagram photos:'));
+    // fetchFromEndpoint(endpoint)
+    //     .then(data => displayPhotos(data.data))
+    //     .catch(error => handleError(error, 'Error fetching Instagram photos:'));
+    // サーバーから写真を取得するように変更
+    fetchPhotosFromServer();
 }
 
 function fetchHashtags() {
@@ -118,7 +120,7 @@ function searchByHashtag() {
 }
 
 function createPhotobook() {
-    const { ACCESS_TOKEN, USER_ID, PHOTOBOOK_NAME } = getInputs();
+    const { USER_ID, PHOTOBOOK_NAME } = getInputs();
     const photosDiv = $("#photos");
     const photos = Array.from(photosDiv.getElementsByTagName("img")).map(img => img.src);
 
@@ -165,4 +167,22 @@ function displaySelectedPhotobook() {
     })
     .then(data => displayLocalPhotos(data))
     .catch(error => handleError(error, 'Error displaying selected photobook:'));
+}
+
+function fetchPhotosFromServer() {
+    const { ACCESS_TOKEN, USER_ID } = getInputs();
+
+    if (!ACCESS_TOKEN || !USER_ID) {
+        alert("Please enter your User ID and ACCESS_TOKEN.");
+        return;
+    }
+
+    // サーバーの fetch_photos エンドポイントにリクエストを送信
+    fetchFromEndpoint('/fetch_photos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: USER_ID, token: ACCESS_TOKEN })
+    })
+    .then(data => displayPhotos(data.photos))
+    .catch(error => handleError(error, 'Error fetching photos from server:'));
 }

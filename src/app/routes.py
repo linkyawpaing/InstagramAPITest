@@ -35,7 +35,7 @@ def fetch_photos():
     if 'error' in data:
         return jsonify({'error': data['error']['message']})
 
-    photos = [photo['media_url'] for photo in data['data'] if photo['media_type'] == 'IMAGE']
+    photos = [photo for photo in data['data'] if photo['media_type'] == 'IMAGE']
     return jsonify({'photos': photos})
 
 @app.route('/fetch_hashtags', methods=['POST'])
